@@ -2,10 +2,15 @@ import kotlinx.benchmark.gradle.BenchmarksExtension
 import org.jetbrains.kotlin.allopen.gradle.AllOpenExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+repositories {
+    mavenCentral()
+    maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev/")
+}
+
 plugins {
-    kotlin("jvm") version "1.7.21"
-    id("org.jetbrains.kotlinx.benchmark") version "0.4.4"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.7.21"
+    kotlin("jvm") version "2.0.0-dev-5520"
+    id("org.jetbrains.kotlinx.benchmark") version "0.4.9"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.10"
 }
 
 group = "org.stitzl"
@@ -16,11 +21,11 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-benchmark-runtime:0.4.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-benchmark-runtime:0.4.9")
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+    kotlinOptions.jvmTarget = "21"
 }
 
 configure<AllOpenExtension> {
