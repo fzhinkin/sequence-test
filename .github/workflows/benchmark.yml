@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  benchmarks-with-jdk17:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -28,6 +28,23 @@ jobs:
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '17'
+
+      # Runs a single command using the runners shell
+      - name: Run the benchmark
+        run: ./gradlew benchmark
+
+  benchmarks-with-jdk21:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '21'
 
       # Runs a single command using the runners shell
       - name: Run the benchmark
