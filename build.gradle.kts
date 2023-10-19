@@ -25,7 +25,7 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "21"
+    kotlinOptions.jvmTarget = "17"
 }
 
 configure<AllOpenExtension> {
@@ -35,9 +35,10 @@ configure<AllOpenExtension> {
 configure<BenchmarksExtension> {
     configurations {
         named("main") { // main configuration is created automatically, but you can change its defaults
-            warmups = 20 // number of warmup iterations
+            warmups = 5 // number of warmup iterations
             iterations = 10 // number of iterations
             iterationTime = 10 // time in seconds per iteration
+            advanced("jvmForks", 5)
         }
     }
     targets {
